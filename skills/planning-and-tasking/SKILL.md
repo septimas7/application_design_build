@@ -53,6 +53,10 @@ Order tasks to satisfy dependencies and keep the system buildable at each step. 
 
 Split indicators: the title contains "and"; it spans multiple independent subsystems; it touches more than ~5 files; it's more than ~a day of work. Agents and humans both perform best on **S/M**.
 
+## Certifying a checkpoint / milestone task
+
+A checkpoint task's job is to **verify evidence, not to generate it** — and never to rubber-stamp. When you claim one and find its gated set mostly unbuilt, there are two honest paths: **report** the true state and leave the checkpoint open, or **build** the gap first. Converting a certification into a multi-day build campaign is a **scope escalation the owner decides**, not the agent: present the finding, the two options with estimated shape, and the proposed review checkpoints — then proceed on the owner's call. When certifying, close each gated item only on evidence that would fail if the feature broke; a checkpoint closed on adjacent or prose evidence is a false green at milestone scale.
+
 ## Which log gets the task
 
 - **Root `tasks.md`** — cross-cutting/program work, Platform (the Platform unit) work, anything spanning multiple applications.

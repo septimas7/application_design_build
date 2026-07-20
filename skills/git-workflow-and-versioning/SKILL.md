@@ -29,6 +29,7 @@ Atomic, traceable commits on a trunk-based flow. The git history is where the de
 ## Review chunks (long autonomous runs)
 
 - A **review chunk** is a completed unit wave (one plugin/unit's task set) or roughly ~10K changed lines — whichever comes first. At that point, push and hand the branch off for review, then continue on the **next** unit. Work never stops for review; but a defect also never gets ten more hours of work stacked on top of it.
+- **A checkpoint task closing is always a review boundary** — even mid-campaign: push, flag for review, **re-cut a fresh branch named for the next wave**, and continue there. (Audited: a 20-task, 29K-line campaign rode one branch named for its first subtask, through two checkpoint closes, until the owner had to interrupt to get a review point. The checkpoint should have paused itself.)
 - **Don't cross-merge in-flight feature branches.** If branch B needs branch A's work, A is by definition review-ready — hand it off. Stacking merges of unreviewed branches multiplies conflict resolution and forces re-review of moved code.
 - **Open the draft PR at branch creation**, so CI runs from the first push and its history exists when a failure needs triage.
 

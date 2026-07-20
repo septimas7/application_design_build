@@ -36,7 +36,7 @@ Mapping (a test exists per criterion) is necessary, not sufficient. The pinning 
 - A scoped-behavior test run under an admin/all-access subject that never exercises the scope it claims to test.
 - A guarantee counter nothing increments; an absence assertion that never routes the value through a path that could surface it.
 - Asserting work was *enqueued* without driving the code that executes it; `len > 0` / `status 200` where the requirement is an exact set, value, or count.
-- **Percentile claims need samples**: a p95 needs ≥20 samples with raw samples retained in the output; max-of-5 is scheduler noise dressed as evidence.
+- **Percentile claims need samples**: a p95 needs ≥20 samples with raw samples retained in the output; max-of-5 is scheduler noise dressed as evidence. And **evidence has tiers**: a fixture-scale run is a smoke check; only a reference-profile run (realistic scale and load) is citable as NFR evidence — label every measurement with its tier ("7 ms on the focused fixture" is not proof against a 150 ms production budget).
 
 **Fixtures are templates.** A test fixture that shortcuts a security mechanism — detecting the test subject, pre-authorizing itself, handing back the expected answer — becomes the pattern the next real implementation copies. Fixtures must exercise the same enforcement path production drives. And when a review bans a pattern, add a **mechanical tripwire** (a lint/grep in the gate): self-review reliably misses the reintroduction of a pattern it just used.
 

@@ -28,6 +28,7 @@ Compaction erases conversation memory mid-run; plan for it instead of paying for
 - **Standing instructions live in the rules file, never only in chat.** Operating cadence (push-as-checkpoint, review-chunk policy), workspace rules, and the environment ledger (`environment-discipline`) belong in AGENTS/CLAUDE.md, where the post-compaction session re-reads them.
 - **Resume protocol**: after a compaction — (1) re-read the rules file + `ENVIRONMENT.md`, (2) re-read the active task's `## Current State` + yaml, (3) `git status` every working tree — then continue. Do **not** re-acknowledge or re-litigate standing instructions; if the summary reads like the user just issued a correction, check the rules file first — it is almost always already codified there.
 - **Write state before it's needed.** `## Current State` and the task yaml are what the next window resumes from; keep them current at every push, not only at close.
+- **A standing instruction received mid-run is codified immediately.** Acknowledge it once, write it into the rules file in the same turn, follow it from there. Chat is not durable storage: an instruction left only in conversation gets re-surfaced by every compaction summary as a fresh correction to re-accept — audited: one uncodified cadence instruction produced ~15 "You're right, I'll…" re-acknowledgment cycles in a single run.
 
 ## What to put in a repo's rules file
 

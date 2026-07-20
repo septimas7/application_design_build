@@ -44,6 +44,7 @@ Once a `task-NNNNN` is planned, implementation runs against the design docs as t
 | A change touches auth/RBAC/secrets/boundaries | `security-and-hardening` |
 | A path is measurably slow | `performance-optimization` |
 | Commit, branch, or version an interface | `git-workflow-and-versioning` |
+| Running local verification gates (suites, check scripts, benchmarks) in a long session | `running-quality-gates` |
 | Set up or change the pipeline / quality gates | `ci-cd-and-automation` |
 | Retire or migrate an interface, schema, or data | `deprecation-and-migration` |
 | Add logging / metrics / tracing | `observability-and-instrumentation` |

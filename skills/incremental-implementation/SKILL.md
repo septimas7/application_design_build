@@ -28,7 +28,7 @@ Do not load whole subsystems. Navigate by stable ID.
 ## Process
 
 1. **Pick the next slice.** The smallest vertical path that makes one acceptance criterion (or part of one) true. Order by the dependency map from the plan.
-2. **Test-first where it fits** — call `test-driven-development` for logic with a clear contract; the test encodes the acceptance criterion.
+2. **Test-first where it fits — invoked per slice, not per run.** Call `test-driven-development` at the start of *each* slice with a definable contract; the test encodes the acceptance criterion. (Audited: a single run-opening invocation decayed within hours — red-first held in only half the slices. The per-slice call is what sustains it.)
 3. **Implement to the contract.** The service interface signature comes from the Technical Design; the wire shape from the Directory entry; the schema from the Data Dictionary. Don't invent contracts — implement the ones already specified.
 4. **Verify the slice.** Run the slice's tests + a real check (run it; for the web client / portal, call `browser-testing-with-devtools`). Evidence, not vibes. Gate economics: run the **focused** suite per slice; run the **full** gate once per pushed chunk — and once more only if a fix touched shared surface, not after every test-only repair.
 5. **Commit the slice.** Atomic commit citing `task-NNNNN` (see `git-workflow-and-versioning`). One slice = one commit.

@@ -27,6 +27,7 @@ No mid-run journaling: continuous appends churn data and interrupt the work. Tow
 - **Per significant step**: what was attempted, which tools were used, what the result was. Failures and dead ends included — they carry more audit value than the successes.
 - **Record every user input verbatim**, clearly marked (e.g. a `> USER:` prefix). The decisions, approvals, corrections, and clarifications the human supplied are first-class data: they are the candidates for automating those inputs away in future runs.
 - **Close with the five-line summary**: what shipped, what's blocked, what surprised, what was learned, what the next run should know first.
+- **Then the "Decisions needed" register**: reproduce **verbatim** every question parked for the human during the run — design blockers recorded, scope calls deferred, approvals pending. A parked decision buried in the log body is a decision the owner never gets to make (audited: a run parked two design blockers correctly, then omitted both from its final handoff; the owner had to excavate the log).
 
 ## The audit loop — the point of it all
 
@@ -63,5 +64,5 @@ A long run with no journal file · a journal written from post-compaction memory
 - [ ] The run has a journal file (right name, frontmatter complete) in the design repo.
 - [ ] The journal was exported at run end from the stored session history — attempts, tools, results, in order; gaps marked, none papered over.
 - [ ] Every user input appears verbatim and marked.
-- [ ] The closing five-line summary is present.
+- [ ] The closing five-line summary is present, followed by the "Decisions needed" register (or an explicit "none").
 - [ ] A process audit is scheduled (or ran), and each of its findings landed in a skill, convention, ledger, rules file — or an automation of a recurring user input.
