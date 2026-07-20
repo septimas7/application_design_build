@@ -38,7 +38,7 @@ The **Design & Build Skills** are installed in `~/.codex/skills/`. Start with `u
 
 ## Run journal
 
-Every long run keeps an **append-only journal**: `Journals/YYYY-MM-DD-<agent>-<machine>-<slug>.md` in the design repo (`run-journaling` skill). At each checkpoint push — and before a compaction when possible — append your narrated progress since the last checkpoint, unedited; at run end, add a five-line closing summary. One file per run, so concurrent agents never collide. These journals feed the process audits that harden the skills and this file — the dead ends and rework are the valuable part; never clean them up.
+Every long run ends by exporting an **append-only journal**: `Journals/YYYY-MM-DD-<agent>-<machine>-<slug>.md` in the design repo (`run-journaling` skill). No mid-run journaling — toward the end of the run, write the whole record once **from the session's stored chat history** (not from working memory; mark any genuinely irretrievable pre-compaction stretch as a gap, never reconstruct it from impression): per significant step, what was attempted, which tools were used, and what the result was — failures and dead ends included — plus **every user input verbatim**, marked (`> USER:`). Close with five lines: shipped / blocked / surprised / learned / what the next run should know. One file per run, so concurrent agents never collide. These journals feed the process audits that harden the skills and this file — the dead ends, rework, and user interventions are the valuable part; never clean them up.
 
 ## Commit / test conventions
 

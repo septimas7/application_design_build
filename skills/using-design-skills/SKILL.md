@@ -48,7 +48,7 @@ Once a `task-NNNNN` is planned, implementation runs against the design docs as t
 | Retire or migrate an interface, schema, or data | `deprecation-and-migration` |
 | Add logging / metrics / tracing | `observability-and-instrumentation` |
 | Workspace/tooling friction; an environmental root cause; a new worktree or long autonomous run | `environment-discipline` |
-| A long autonomous run (journal it); checkpoint pushes; mining past runs for lessons | `run-journaling` |
+| The end of a long autonomous run (export the journal); mining past runs for lessons | `run-journaling` |
 | Release a capability | `shipping-and-launch` |
 
 A typical task flows: `incremental-implementation` (calling `test-driven-development`, `api-and-interface-design`, `frontend-ui-engineering` as needed) → `code-review-and-quality` → `git-workflow-and-versioning` → `shipping-and-launch`, with `debugging-and-error-recovery`, `code-simplification`, `security-and-hardening`, and `performance-optimization` as called for. The operating principles and the "verify with evidence" rule below apply identically to build work.
