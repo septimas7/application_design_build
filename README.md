@@ -46,7 +46,8 @@ Implement a planned `task-NNNNN` against the design docs. The stack + doc→code
 | `api-and-interface-design` | Build | Implement an interface to match its Directory entry exactly. |
 | `browser-testing-with-devtools` | Verify | Verify a portal page's documented states at runtime. |
 | `debugging-and-error-recovery` | Verify | Reproduce→localize→reduce→fix→guard→classify, using the logs. |
-| `environment-discipline` | Verify | Durable ENVIRONMENT.md gotcha ledger; workspace hygiene; promote recurring gotchas into fixes. |
+| `environment-discipline` | Verify | Durable ENVIRONMENT.md gotcha ledger (multi-agent/multi-machine); workspace hygiene; promote recurring gotchas into fixes. |
+| `run-journaling` | Verify | Append-only run journals per agent/machine + the process-audit loop that mines them. |
 | `code-review-and-quality` | Review | Five-axis review; verify code matches the contract it claims. |
 | `code-simplification` | Review | Reduce complexity; Chesterton's Fence; no behavior change. |
 | `security-and-hardening` | Review | RBAC, secret store, boundary defenses per the docs. |

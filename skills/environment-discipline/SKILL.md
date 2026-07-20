@@ -24,6 +24,17 @@ Every implementation repo carries an append-friendly `ENVIRONMENT.md` (a section
 
 Recurring categories: infrastructure limits (name/size/count caps) · runtime defaults that differ between test and production (executor flavor, locale-dependent ordering) · toolchain quirks (linkers, per-worktree `node_modules`/`dist`) · workspace hazards (synced folders, shared checkouts) · external-service behavior (which CI/API errors are retry-worthy noise vs real).
 
+## Multiple agents, multiple machines
+
+The ledger is shared by every agent on every machine that works the repo, so structure it for that:
+
+- **`## Universal`** — facts true everywhere (infrastructure limits, runtime defaults, framework quirks). Most entries land here.
+- **`## Machine: <name>`** — one section per machine, using the same machine identifiers the task logs' `machine:` field uses. Local facts only: ports already in use, missing tools, hardware, path layout.
+- **Stamp every entry** `(<agent> @ <machine>, YYYY-MM-DD)` — an audit needs to know who learned what, where, when.
+- **Append, don't restructure**: add each entry as a self-contained block at the end of its section. Entries are never rewritten — a correction is a later entry; removal happens only at promotion. This keeps concurrent edits from different agents nearly conflict-free, and a merge conflict resolves by keeping **both** entries.
+- **Pull before appending; push promptly.** A ledger entry sitting unpushed on one machine is a fact the other machines will pay to rediscover.
+- **Read both sections on resume**: `## Universal` plus your own machine's section. Another machine's section is optional reading — but check it before concluding a machine-specific fact is unknown.
+
 ## The hooks — when an entry MUST be written
 
 1. **Root-cause hook.** `debugging-and-error-recovery` classifies a failure as environmental → append the entry before moving on.
@@ -68,7 +79,7 @@ The same environmental fact diagnosed twice in one project · a resume that runs
 
 ## Verification
 
-- [ ] Every environmental root cause from this session has a ledger entry (fact / symptom / rule).
+- [ ] Every environmental root cause from this session has a ledger entry (fact / symptom / rule), stamped and in the right section (Universal vs this machine), pushed.
 - [ ] The session began with the resume protocol (rules file + ledger + Current State).
 - [ ] Any second-hit entry was promoted (environment fixed, guard added, or rule encoded).
 - [ ] No git operations ran in a cloud-synced working tree.

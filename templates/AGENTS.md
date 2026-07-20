@@ -34,7 +34,11 @@ The **Design & Build Skills** are installed in `~/.codex/skills/`. Start with `u
 
 ## Environment ledger
 
-`ENVIRONMENT.md` in this repo records environment gotchas (**fact / symptom / rule**). Re-read it on every resume. Append an entry whenever a root cause is environmental or >10 minutes go to tooling instead of the task (`environment-discipline` skill). An entry hit twice gets promoted: fix the environment, or add a CI/harness guard.
+`ENVIRONMENT.md` in this repo records environment gotchas (**fact / symptom / rule**), shared by every agent on every machine. Structure: `## Universal` + one `## Machine: <name>` section per machine (same identifiers as the task logs' `machine:` field). Stamp entries `(<agent> @ <machine>, date)`; append at the end of the right section; pull before appending, push promptly. Re-read `## Universal` + your machine's section on every resume. Append whenever a root cause is environmental or >10 minutes go to tooling instead of the task (`environment-discipline`). An entry hit twice gets promoted: fix the environment, or add a CI/harness guard.
+
+## Run journal
+
+Every long run keeps an **append-only journal**: `Journals/YYYY-MM-DD-<agent>-<machine>-<slug>.md` in the design repo (`run-journaling` skill). At each checkpoint push — and before a compaction when possible — append your narrated progress since the last checkpoint, unedited; at run end, add a five-line closing summary. One file per run, so concurrent agents never collide. These journals feed the process audits that harden the skills and this file — the dead ends and rework are the valuable part; never clean them up.
 
 ## Commit / test conventions
 
