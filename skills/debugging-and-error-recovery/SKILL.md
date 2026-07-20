@@ -1,6 +1,6 @@
 ---
 name: debugging-and-error-recovery
-description: Use on any bug, test failure, or unexpected behavior - a five-step triage (reproduce, localize, reduce, fix, guard) that uses the Log Dictionary / app-log / audit-log to localize and writes a guard test before fixing. Find the root cause, never patch the symptom.
+description: Use on any bug, test failure, or unexpected behavior - a six-step triage (reproduce, localize, reduce, fix, guard, classify) that uses the Log Dictionary / app-log / audit-log to localize, writes a guard test before fixing, and records environmental root causes in the ENVIRONMENT.md ledger. Find the root cause, never patch the symptom.
 ---
 
 # Debugging & Error Recovery
@@ -11,13 +11,14 @@ A disciplined triage for any bug, failure, or surprise. **Root cause, not sympto
 
 - A test fails, behavior is wrong, or something is unexpected — **before** proposing a fix.
 
-## The five steps
+## The six steps
 
 1. **Reproduce.** Get a reliable, minimal repro. Write it as a **failing test** (this becomes the guard). No repro means keep gathering evidence; don't guess-fix.
 2. **Localize.** Narrow to the responsible component. Use the **structured logs** — the **Log Dictionary** names per-component sources; the **app-log** (queryable, with per-component levels) and the **audit-log** show what happened. Bisect by component boundary, not by hunch.
 3. **Reduce.** Strip the repro to the smallest input/path that still fails. Often this alone reveals the cause.
 4. **Fix the root cause.** Change the thing that is actually wrong — not a downstream symptom. If the bug means a contract was wrong, fix the **Directory entry / Data Dictionary** too, not just the code.
 5. **Guard.** Keep the reproduction test green as a regression guard. If the class of bug is broad, add a guard at the boundary (validation, an assertion, an invariant).
+6. **Classify & record.** Was the root cause a **product defect**, a **test-harness defect**, or **environmental** (tooling, infrastructure, workspace state)? An environmental cause gets an entry in the repo's `ENVIRONMENT.md` ledger before you move on (`environment-discipline`) — the second rediscovery of the same fact is a process failure, not bad luck.
 
 ## Use the system's own observability
 

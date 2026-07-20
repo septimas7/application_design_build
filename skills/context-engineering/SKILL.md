@@ -21,6 +21,14 @@ Optimize *what information reaches the agent* so it works from the smallest corr
 4. **Right-size the task first.** If a task needs more than ~5 files of context, it's too big — send it back to `planning-and-tasking` to slice.
 5. **Rules files carry the standing context.** Per repo, a CLAUDE.md states: the stack, where the design docs live, the doc->code mapping, the commit/test conventions, and "load only what the task touches." Keep it short — it's loaded every session.
 
+## Surviving context compaction (long autonomous runs)
+
+Compaction erases conversation memory mid-run; plan for it instead of paying for it:
+
+- **Standing instructions live in the rules file, never only in chat.** Operating cadence (push-as-checkpoint, review-chunk policy), workspace rules, and the environment ledger (`environment-discipline`) belong in AGENTS/CLAUDE.md, where the post-compaction session re-reads them.
+- **Resume protocol**: after a compaction — (1) re-read the rules file + `ENVIRONMENT.md`, (2) re-read the active task's `## Current State` + yaml, (3) `git status` every working tree — then continue. Do **not** re-acknowledge or re-litigate standing instructions; if the summary reads like the user just issued a correction, check the rules file first — it is almost always already codified there.
+- **Write state before it's needed.** `## Current State` and the task yaml are what the next window resumes from; keep them current at every push, not only at close.
+
 ## What to put in a repo's rules file
 
 - Pointer to the project's design repo + the doc->code mapping.
@@ -40,7 +48,7 @@ Optimize *what information reaches the agent* so it works from the smallest corr
 
 ## Red flags
 
-An agent loading whole subsystems for a one-component change · grepping for contracts the Directories already define · a bloated rules file · a task whose context exceeds ~5 files with no push-back to re-slice.
+An agent loading whole subsystems for a one-component change · grepping for contracts the Directories already define · a bloated rules file · a task whose context exceeds ~5 files with no push-back to re-slice · re-acknowledging the same standing instruction after every compaction (it belongs in the rules file).
 
 ## Verification
 

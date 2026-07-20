@@ -20,6 +20,7 @@ Automate the quality gates so they run on **every** change, not at the end. **Sh
 4. **Lint / format / types** — backend lint + format, the web client's linter + type checks.
 5. **Security** — a dependency audit, secret-scan (no plaintext credentials), basic SAST. Escalate auth/RBAC changes to `security-and-hardening`.
 6. **Gate the merge** — all green or no merge.
+7. **Pin cross-repo baselines.** When a gate checks out a second repo (design docs, shared fixtures), the branch declares *which ref* it verifies against (its paired branch/SHA) — never implicitly that repo's `main`. Otherwise unrelated drift in the other repo reds your build, burns an investigation cycle, and trains everyone to ignore CI.
 
 ## Feature flags for safe rollout
 

@@ -30,9 +30,17 @@ Do not load whole subsystems. Navigate by stable ID.
 1. **Pick the next slice.** The smallest vertical path that makes one acceptance criterion (or part of one) true. Order by the dependency map from the plan.
 2. **Test-first where it fits** — call `test-driven-development` for logic with a clear contract; the test encodes the acceptance criterion.
 3. **Implement to the contract.** The service interface signature comes from the Technical Design; the wire shape from the Directory entry; the schema from the Data Dictionary. Don't invent contracts — implement the ones already specified.
-4. **Verify the slice.** Run the slice's tests + a real check (run it; for the web client / portal, call `browser-testing-with-devtools`). Evidence, not vibes.
+4. **Verify the slice.** Run the slice's tests + a real check (run it; for the web client / portal, call `browser-testing-with-devtools`). Evidence, not vibes. Gate economics: run the **focused** suite per slice; run the **full** gate once per pushed chunk — and once more only if a fix touched shared surface, not after every test-only repair.
 5. **Commit the slice.** Atomic commit citing `task-NNNNN` (see `git-workflow-and-versioning`). One slice = one commit.
 6. **Repeat** until every `#### Acceptance` checkbox is satisfiable.
+
+## When blocked by a missing contract
+
+A slice needs an interface, hook, or route the design docs don't define? **Never fabricate it, and never fake the integration** (a polling loop standing in for a missing event, a stub host for an unbuilt hook). Record the gap as a design question (the unit's Open Questions + the task's `#### Notes`), leave the affected acceptance box honestly unchecked, and take the next unblocked slice. Blocked-and-recorded is progress; an invented contract is future rework plus a false green.
+
+## Claiming a task that carries review debt
+
+If a prior review deferred items *into* this task ("lands in task-NNNNN"), walk that list as a checklist at claim time: each item is either **built here** or **explicitly re-deferred with a note in the log**. Silence is what turns a deferral into a regression.
 
 ## On close (Task Log Convention)
 
@@ -40,6 +48,7 @@ Do not load whole subsystems. Navigate by stable ID.
 - Set `status: completed`, fill `#### Result` (what shipped + where), bump `last_updated`.
 - **Rewrite `## Current State`** so a fresh contributor can resume.
 - If a constraining decision was made mid-build, add a **Decision Record** to `#### Notes`.
+- **Coherence check before committing the log**: yaml and prose must agree — `status: completed` ⇔ `closed:` date set ⇔ every `#### Acceptance` box checked ⇔ `#### Result` filled (and the converse for `in_progress`). Verify the edit landed on the *intended* task block, not an adjacent one — read the rendered diff. A yaml/prose contradiction is an evidence defect.
 
 ## Anti-rationalization
 

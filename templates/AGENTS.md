@@ -25,6 +25,17 @@ The **Design & Build Skills** are installed in `~/.codex/skills/`. Start with `u
 - **Read the contract, not the source** — the Directory entry (with its example) is the interface.
 - Implement to the specified contracts (service interface / Directory entry / Data Dictionary schema / action gate). Don't invent contracts; a gap means update the design docs first.
 
+## Operating cadence (autonomous runs)
+
+- **Pushes are checkpoints, not review requests.** Keep working; `main` stays untouched until the owner merges. This is a standing instruction — never re-acknowledge it after a context compaction.
+- A **review chunk** = a completed unit wave or ~10K changed lines, whichever comes first: push it, hand it off, continue on the next unit. Don't cross-merge in-flight feature branches. Open the draft PR at branch creation.
+- **Blocked by a missing contract?** Record the design question (Open Questions + task Notes), leave the acceptance box unchecked, take the next unblocked slice. Never fabricate a contract or fake an integration.
+- **After a context compaction**: re-read this file + `ENVIRONMENT.md` + the active task's `## Current State`, then continue.
+
+## Environment ledger
+
+`ENVIRONMENT.md` in this repo records environment gotchas (**fact / symptom / rule**). Re-read it on every resume. Append an entry whenever a root cause is environmental or >10 minutes go to tooling instead of the task (`environment-discipline` skill). An entry hit twice gets promoted: fix the environment, or add a CI/harness guard.
+
 ## Commit / test conventions
 
 - `<backend test runner>` + `<web client test runner>`; tests encode FR/acceptance and are named for their `FR-###`.

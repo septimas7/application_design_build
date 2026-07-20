@@ -20,6 +20,10 @@ Review a change before it merges. Beyond generic quality, the project-specific j
 4. **Security.** Boundary validation, the action gate enforced, secrets via the platform secret store (never plaintext), no injection. Escalate to `security-and-hardening` for auth/RBAC-touching changes.
 5. **Clarity.** Reads like the surrounding code; names match the docs' IDs; no needless complexity (see `code-simplification`). Comments where the *why* isn't obvious.
 
+## Verifying a fix pass
+
+When re-reviewing after findings were "implemented", every original finding gets exactly one of three states — **CLOSED** (cite the fix location *and* the test that would catch a regression), **DEFERRED-RECORDED** (cite the task-log note), or **NOT-ADDRESSED** (a live finding). *Unrecorded absence is the only wrong answer.* And review the fix itself as a change like any other — fixes introduce defects too (the classic: a fix to pagination that handles the reported case and breaks an adjacent one).
+
 ## Scope discipline
 
 Review only the change. Note unrelated issues separately; don't expand the diff. A diff that bundles unrelated work gets sent back to be split.

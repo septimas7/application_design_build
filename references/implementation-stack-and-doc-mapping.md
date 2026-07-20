@@ -8,13 +8,13 @@ Record the project's stack here once, then the Build skills inherit it. Update t
 
 | Layer | Your choice | Notes |
 |---|---|---|
-| Backend (Platform unit + plugins) | `<language / runtime>` | Hosts the service contracts (DI) and plugin lifecycle. |
-| Database | `<database>` | Plus a flexible JSON overflow field for hybrid records; a migration runner. |
-| Message / event bus | `<queue / event bus>` | Durable async between units. |
-| API + MCP surface | `<HTTP API + MCP>` | Client-agnostic; MCP↔API parity per the Directories. |
-| Web client | `<web framework>` | The portal; consumes the API/MCP surface and renders the Platform design system. |
-| Desktop client (optional) | `<optional desktop shell>` | Additive client that reuses the web portal; no backend rearchitecture. |
-| Secret store | The platform secret store | External-service credentials never plaintext. |
+| Backend (Platform unit + plugins) | Rust stable, 2024 edition, tokio async runtime | Hosts service contracts and plugin lifecycle; kernel plus crate-per-plugin workspace. |
+| Database | PostgreSQL 16+ with pgvector and PGMQ; sqlx migrations and compile-time checked parameterized queries | Relational store, vector store, durable queues, and migration runner. |
+| Message / event bus | PGMQ in PostgreSQL | Durable async between units; no separate broker in v1. |
+| API + MCP surface | Axum HTTP API plus MCP over Streamable HTTP | Client-agnostic; MCP/API parity per the Directories; SSE via Axum streams. |
+| Web client | React + TypeScript with Vite | The portal consumes only API/MCP and renders the Platform design system. |
+| Desktop client (optional) | Tauri shell reusing the portal | Additive client with no backend rearchitecture. |
+| Secret store | Nexus kernel secret store / broker exclusively | External-service credentials never plaintext; only broker handles cross boundaries. |
 
 A **connector** plugin may use a different language/runtime to bridge an external product — its `Technical Design` external-integrations section governs.
 

@@ -45,7 +45,8 @@ Implement a planned `task-NNNNN` against the design docs. The stack + doc→code
 | `frontend-ui-engineering` | Build | Implement a web client / portal page from its UI requirements. |
 | `api-and-interface-design` | Build | Implement an interface to match its Directory entry exactly. |
 | `browser-testing-with-devtools` | Verify | Verify a portal page's documented states at runtime. |
-| `debugging-and-error-recovery` | Verify | Reproduce→localize→reduce→fix→guard, using the logs. |
+| `debugging-and-error-recovery` | Verify | Reproduce→localize→reduce→fix→guard→classify, using the logs. |
+| `environment-discipline` | Verify | Durable ENVIRONMENT.md gotcha ledger; workspace hygiene; promote recurring gotchas into fixes. |
 | `code-review-and-quality` | Review | Five-axis review; verify code matches the contract it claims. |
 | `code-simplification` | Review | Reduce complexity; Chesterton's Fence; no behavior change. |
 | `security-and-hardening` | Review | RBAC, secret store, boundary defenses per the docs. |

@@ -1,6 +1,6 @@
 {
   "name": "design-and-build-skills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A convention-driven agent-skill set for the full software lifecycle: Define -> Plan -> Build -> Ship. The project's Conventions are the single source of truth; the skills author the design docs and implement them as code.",
   "author": { "name": "Varun" }
 }
