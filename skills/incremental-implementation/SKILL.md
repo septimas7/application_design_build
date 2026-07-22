@@ -49,6 +49,7 @@ If a prior review deferred items *into* this task ("lands in task-NNNNN"), walk 
 - **Rewrite `## Current State`** so a fresh contributor can resume.
 - If a constraining decision was made mid-build, add a **Decision Record** to `#### Notes`.
 - **Coherence check before committing the log**: yaml and prose must agree — `status: completed` ⇔ `closed:` date set ⇔ every `#### Acceptance` box checked ⇔ `#### Result` filled (and the converse for `in_progress`). Verify the edit landed on the *intended* task block, not an adjacent one — read the rendered diff. A yaml/prose contradiction is an evidence defect.
+- **Hand-edited coordination files corrupt at agent speed — care doesn't scale, lint does.** (Audited: three of four branches in one evening corrupted the shared register — a false milestone completion, a dependency edge on the wrong task, silently closed entries — plus 29 broken revision tables; every one was an adjacent-block or table-structure edit slip.) The durable fix is a mechanical doc-lint gate: yaml⇄prose coherence, table structure (new revision rows go *below* the `|---|` separator), and citation resolution. These lints are a stand-in for a schema — once coordination moves to a structured store whose API validates writes and rejects malformed updates with an error, they retire; until then they are the only validation the file has.
 
 ## Anti-rationalization
 

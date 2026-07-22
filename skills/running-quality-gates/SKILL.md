@@ -35,6 +35,13 @@ Every gate run writes its output **and its exit code to a file on disk**:
 | Environment repair (deps restored, artifact rebuilt) | re-run only the step that failed — an environment fix does not invalidate already-green code results, and "a clean pass for the record" is aesthetics, not evidence |
 | Chunk close (pre-push of a review chunk) | the full gate set, once |
 
+## A green gate must prove it ran something
+
+`cargo test <filter>` (and most runners) **exit 0 when the filter matches zero tests** — a rename silently unwires a suite and the ledger stays green with no measurement behind it. (Audited: this exact mode occurred twice in one evening, independently, in two different evidence scripts.)
+
+- Every gate/evidence script asserts a **nonzero pass count** per run, e.g. `grep -Eq 'test result: ok\. [1-9][0-9]* passed' "$log"` — never just the exit code.
+- When a cited test is renamed, grep the repo for the old name: harnesses, evidence scripts, and traceability maps all pin names.
+
 ## Benchmarks are gates too
 
 - A reference-profile benchmark result is **reusable within a session** unless the measured path changed — never rerun a multi-minute benchmark for bookkeeping ("this harness is the one that records the number": record the number you already have).
@@ -52,12 +59,13 @@ Every gate run writes its output **and its exit code to a file on disk**:
 
 ## Red flags
 
-A gate rerun whose only justification is a lost exit code · more than one no-delta gate-progress post · a full code gate triggered by a docs-only diff · the same multi-minute benchmark run twice in one session on an unchanged path · two gate runners alive at once · gate output that exists only in the (compactable) session.
+A gate script that trusts the runner's exit code without asserting a nonzero pass count · a gate rerun whose only justification is a lost exit code · more than one no-delta gate-progress post · a full code gate triggered by a docs-only diff · the same multi-minute benchmark run twice in one session on an unchanged path · two gate runners alive at once · gate output that exists only in the (compactable) session.
 
 ## Verification
 
 - [ ] Every gate run this session tee'd output + exit code to a file; resumes read files instead of rerunning.
 - [ ] No no-delta gate narration; gates ran in the background.
 - [ ] Every rerun maps to a row of the change-class matrix; shared-surface changes were pre-scanned and batched.
+- [ ] Every gate/evidence script asserts a nonzero pass count, not just exit 0.
 - [ ] No benchmark was repeated on an unchanged path; measurements are tier-labeled.
 - [ ] Task-log evidence cites the gate log files.
