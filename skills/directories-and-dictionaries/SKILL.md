@@ -29,6 +29,7 @@ Each is the canonical SSOT for its kind; other docs **reference, never duplicate
 4. **At least one example per interface entry is mandatory** — this is what lets an external agent self-serve.
 5. **Deprecate, don't delete** — `status` (active | deprecated | removed) + `since`.
 6. **Cross-link siblings** — MCP ↔ API equivalents; webhook ↔ event.
+7. **Stay in sync with the FS/TD contract.** A Directory entry is the *catalog* of a contract the Functional Spec / Technical Design commits to. When that contract changes (a result/wire shape, an event name/payload, a persisted field, a signature), **the Directory entry changes in the SAME fold** — an FS that now says `{unit,kind,ref}` while the API Directory still returns a scalar, or a Data Dictionary that persists a field the API Directory omits, is a silent build-blocker. When you touch a contract, update its entry across **every** sibling Directory that projects it (Data/API/MCP/Events/Web Hooks) and any consuming app's Directory, not just the one you opened.
 
 For example, table `catalog_item` lives in the Data Dictionary; action `catalog.item.create` (min level `editor`, area `catalog.area.items`) in the Resources & Grants Dictionary; tool `catalog.create_item` cross-links API `catalog.api.create_item`; event `catalog.item.created`; user-exit `catalog.before_item_write`; config key `catalog.config.max_items`.
 

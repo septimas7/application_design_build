@@ -53,6 +53,10 @@ Order tasks to satisfy dependencies and keep the system buildable at each step. 
 
 Split indicators: the title contains "and"; it spans multiple independent subsystems; it touches more than ~5 files; it's more than ~a day of work. Agents and humans both perform best on **S/M**.
 
+## Design vs build: an "author the contracts" task is `#design`, not build
+
+Carve gate, **both directions**: (1) don't carve a **build** task that cites a surface (tool, endpoint, event, table, config key) whose Directory entry does not yet exist — author the contract first. (2) Conversely, **a task whose objective *begins with* authoring or defining contracts** — a Directory entry, a component Technical Design delta, a kernel-capability contract — **is design work; tag it `#design` and give it to the design owner, never a build agent.** Split any code-only implementation into a separate task that `depends_on` the design one. A build agent handed a "define these contracts, then implement them" task will (correctly) refuse the first half — so don't conflate them at carve time. (The `task-00085` lesson: a platform "add kernel capability" task was carved as build but begins with authoring absent rbac/http-mcp/secrets contracts; the build agent handed it back.)
+
 ## Certifying a checkpoint / milestone task
 
 A checkpoint task's job is to **verify evidence, not to generate it** — and never to rubber-stamp. When you claim one and find its gated set mostly unbuilt, there are two honest paths: **report** the true state and leave the checkpoint open, or **build** the gap first. Converting a certification into a multi-day build campaign is a **scope escalation the owner decides**, not the agent: present the finding, the two options with estimated shape, and the proposed review checkpoints — then proceed on the owner's call. When certifying, close each gated item only on evidence that would fail if the feature broke; a checkpoint closed on adjacent or prose evidence is a false green at milestone scale.

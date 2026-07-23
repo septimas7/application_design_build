@@ -32,6 +32,10 @@ Attack each assumption as a skeptic would. For each: what would have to be true 
 
 Decide. Either the claim **survives** (record *why*, and the alternative you rejected and *why*), or it's **revised/replaced**. The output is a decision plus its rationale and the road not taken.
 
+## Verifying a fold that changes a contract — look downstream, not just the diff
+
+When you review or verify a design fold that changes a **catalogued contract** (result/wire shape, event name/payload, action, persisted field, endpoint/tool signature), the dangerous failure is a **stale doc that is absent from the changeset** — a Directory or TD that still projects the old shape. It cannot show up in a changed-files review. So the review must explicitly ask: *"For every contract this fold changes, does every Directory/TD that catalogs or projects it — including docs NOT in this fold, and consuming apps' Directories — agree with the new shape? Name any left stale."* Verifying only the changeset's internal consistency misses this every time (the recurring `source_ref` / event-name / persisted-field-vs-API-omission class). Scope the doubt to the contract's whole projection surface, not the diff.
+
 ## Where the output goes
 
 - The **rationale + alternative considered** → the driving task's `#### Notes` as a **Decision Record** (**Decision: / Alternatives considered: / Consequence:** lines). The RECONCILE output maps 1:1 onto these three lines.

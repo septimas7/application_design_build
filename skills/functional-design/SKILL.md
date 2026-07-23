@@ -46,6 +46,10 @@ Example: `FR-001 "Create a catalog item"` is implemented by component `CMP-001 (
 
 If you're naming a table, a service interface/contract, or an endpoint shape — it belongs in the Technical Design / Dictionary / Directory. **Link to it; don't write it here.**
 
+## Changing an existing contract — propagate it (fold-completeness)
+
+When an FR change touches a **catalogued contract** — a result/wire shape, an event name or payload, an action id, a persisted field, an endpoint/tool signature — changing the FR **alone is an incomplete fold**. Every doc that *catalogs or projects* that contract must change in the **same fold**: this app's Directories (Data / API / MCP / Events / Web Hooks / R&G / Config), the Technical Design's type/struct, **and any consuming app's Directory**. Before you request review, enumerate: *"what docs project this contract?"* and confirm each was updated or is deliberately-recorded-unchanged. This is the top design miss: an FR result shape changed but its API/MCP Directory left stale silently blocks the build agent until it hits the mismatch (the recurring `source_ref` / event-name / persisted-field-vs-API-omission class). The stale doc is absent from your diff — so the check is *"what's downstream,"* not *"what did I edit."*
+
 ## Gates to call
 
 - **`doubt-driven-review`** — run on any FR whose acceptance encodes a non-trivial product decision, or where scope is contentious.
