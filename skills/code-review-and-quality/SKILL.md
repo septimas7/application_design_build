@@ -28,6 +28,10 @@ When re-reviewing after findings were "implemented", every original finding gets
 
 Review only the change. Note unrelated issues separately; don't expand the diff. A diff that bundles unrelated work gets sent back to be split.
 
+## Reviewing on a shared clone
+
+Inspect the branch with **read-only git only** — `git show <ref>:<path>`, `git diff <base>...<ref>`, `git log`, `git grep`. Never `git checkout` / `switch` / `reset` / `merge` / `restore` while reviewing. On a shared working copy — especially with concurrent review agents — a review checkout detaches HEAD or moves the tree, and a later merge from that clone silently lands off-branch (the push reports "up-to-date" having merged nowhere). Read the branch *by ref*; never move the working copy to see it. (The landing side of this is `finishing-a-development-branch`.)
+
 ## Anti-rationalization
 
 | Excuse | Reality |
@@ -37,10 +41,11 @@ Review only the change. Note unrelated issues separately; don't expand the diff.
 | "Looks right." | Run it / read it. Evidence, not impression. |
 | "Close enough to the Directory entry." | Divergence from the contract is a blocker. Fix code or the entry. |
 | "I'll note these 5 unrelated nits in this PR." | Scope it. File them separately. |
+| "I'll check out the branch to read it." | Read it by ref (`git show`/`diff`). A checkout on a shared clone breaks the later merge. |
 
 ## Red flags
 
-Code that diverges from its Directory/Dictionary contract; a claimed FR not actually implemented; acceptance criteria with no test; action gate or validation missing; secrets in plaintext; a sprawling unfocused diff.
+Code that diverges from its Directory/Dictionary contract; a claimed FR not actually implemented; acceptance criteria with no test; action gate or validation missing; secrets in plaintext; a sprawling unfocused diff; a review that runs `git checkout`/`reset` on a shared clone.
 
 ## Verification
 
@@ -49,3 +54,4 @@ Code that diverges from its Directory/Dictionary contract; a claimed FR not actu
 - [ ] Tests cover the acceptance + error + permission-denied cases.
 - [ ] Security axis clear (validation, gating, secret store).
 - [ ] Diff is focused; unrelated issues filed separately, not bundled.
+- [ ] If reviewed in a shared clone, inspection used read-only git (`show`/`diff`/`log`/`grep`) — no `checkout`/`reset`.

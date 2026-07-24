@@ -44,6 +44,7 @@ Once a `task-NNNNN` is planned, implementation runs against the design docs as t
 | A change touches auth/RBAC/secrets/boundaries | `security-and-hardening` |
 | A path is measurably slow | `performance-optimization` |
 | Commit, branch, or version an interface | `git-workflow-and-versioning` |
+| Land a review-ready branch onto trunk (merge mechanics) | `finishing-a-development-branch` |
 | Running local verification gates (suites, check scripts, benchmarks) in a long session | `running-quality-gates` |
 | Set up or change the pipeline / quality gates | `ci-cd-and-automation` |
 | Retire or migrate an interface, schema, or data | `deprecation-and-migration` |
@@ -52,7 +53,7 @@ Once a `task-NNNNN` is planned, implementation runs against the design docs as t
 | The end of a long autonomous run (export the journal); mining past runs for lessons | `run-journaling` |
 | Release a capability | `shipping-and-launch` |
 
-A typical task flows: `incremental-implementation` (calling `test-driven-development`, `api-and-interface-design`, `frontend-ui-engineering` as needed) → `code-review-and-quality` → `git-workflow-and-versioning` → `shipping-and-launch`, with `debugging-and-error-recovery`, `code-simplification`, `security-and-hardening`, and `performance-optimization` as called for. The operating principles and the "verify with evidence" rule below apply identically to build work.
+A typical task flows: `incremental-implementation` (calling `test-driven-development`, `api-and-interface-design`, `frontend-ui-engineering` as needed) → `code-review-and-quality` → `git-workflow-and-versioning` → `finishing-a-development-branch` → `shipping-and-launch`, with `debugging-and-error-recovery`, `code-simplification`, `security-and-hardening`, and `performance-optimization` as called for. The operating principles and the "verify with evidence" rule below apply identically to build work.
 
 ## Operating principles (non-negotiable)
 
